@@ -1,5 +1,38 @@
 #include <bits/stdc++.h>
 
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size();
+        if (n <= 1) return;
+
+        // Step 1: Find the pivot (first drop from the right)
+        int i = n - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+
+        // If i < 0, the entire array is in descending order (e.g., [3, 2, 1])
+        // The edge-case rule says we just reverse it to get the smallest order.
+        if (i >= 0) {
+            // Step 2: Find the element to swap with nums[i]
+            // We look from right to left for the first element strictly greater than nums[i]
+            int j = n - 1;
+            while (j > i && nums[j] <= nums[i]) {
+                j--;
+            }
+            
+            // Swap the pivot with its next-highest value
+            std::swap(nums[i], nums[j]);
+        }
+
+        // Step 3: Reverse the descending suffix to make it ascending (minimal)
+        // If i was -1, this reverses the whole array.
+        // If i was a valid index, it reverses everything to the right of i.
+        std::reverse(nums.begin() + i + 1, nums.end());
+    }
+};
+
 using namespace std;
 class Solution
 {
@@ -104,3 +137,6 @@ public:
         return result;
     }
 };
+
+
+////
