@@ -24,9 +24,9 @@ public:
             stones += piles[i+x-1];
             
             if(person == 1) { //Alice
-                result = max(result, stones + solveForAlice(piles, 0, i+x, max(M, x)));
+                result = max(result, stones + solved(piles, 0, i+x, max(M, x)));
             } else { //Bob
-                result = min(result, solveForAlice(piles, 1, i+x, max(M, x)));
+                result = min(result, solved(piles, 1, i+x, max(M, x)));
             }
             
         }
